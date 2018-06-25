@@ -1,0 +1,16 @@
+{
+    "name": "Attributes",
+    "alias": "attributes",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Attributes\\Providers\\AttributesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
