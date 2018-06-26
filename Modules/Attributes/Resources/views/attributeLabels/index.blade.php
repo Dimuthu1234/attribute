@@ -3,8 +3,8 @@
 @section('sub_content')
     @include('_partials._breadcrumb', [
     'one_href' => route('home'), 'one' => 'Attribute',
-    'two_href' => route('master_category.index'), 'two' => 'Master Category',
-    'three_href' => route('master_category.index'), 'three' => 'List'
+    'two_href' => route('attribute_label.index'), 'two' => 'Label',
+    'three_href' => route('attribute_label.index'), 'three' => 'List'
     ])
 
     <section class="info">
@@ -14,15 +14,15 @@
             </div>
         </div>
         <div class="add-button is-pulled-right">
-            <a href="{{ route('master_category.create') }}">
+            <a href="{{ route('attribute_label.create') }}">
                 <button class="button is-create">
-                    <i class="fa fa-plus"></i>&nbsp; Add Master Category
+                    <i class="fa fa-plus"></i>&nbsp; Add Attribute Label
                 </button>
             </a>
         </div>
         <div class="columns">
             <div class="column">
-                @include('attributes::masterCategories._list')
+                @include('attributes::attributeLabels._list')
             </div>
         </div>
     </section>

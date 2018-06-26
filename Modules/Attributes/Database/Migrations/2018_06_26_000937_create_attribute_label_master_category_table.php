@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttributeLabelsTable extends Migration
+class CreateAttributeLabelMasterCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateAttributeLabelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('attribute_labels', function (Blueprint $table) {
+        Schema::create('attribute_label_master_category', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('table_id')->nullable();
-            $table->integer('status')->default(0);
-            $table->string('recorded_id')->nullable();
+            $table->integer('master_category_id');
+            $table->integer('attribute_label_id');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateAttributeLabelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_labels');
+        Schema::dropIfExists('attribute_label_master_category');
     }
 }

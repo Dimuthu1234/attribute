@@ -8,27 +8,22 @@
     ])
 
     <section class="info">
-            <div class="columns">
-                <div class="column">
-                    @include('_partials.alert.sessionsMessage')
-                </div>
+        <div class="columns">
+            <div class="column">
+                @include('_partials.alert.sessionsMessage')
             </div>
-            <div class="add-button is-pulled-right">
-
-                {{--<div class="column">--}}
-                    <a href="{{ route('type.create') }}">
-                        <button class="button is-create">
-                            <i class="fa fa-plus"></i>&nbsp; Add Type
-                        </button>
-                    </a>
-                {{--</div>--}}
-            </div>
-
-
-            <div class="columns">
-                <div class="column">
+        </div>
+        <div class="add-button is-pulled-right">
+            <a href="{{ route('type.create') }}">
+                <button class="button is-create">
+                    <i class="fa fa-plus"></i>&nbsp; Add Type
+                </button>
+            </a>
+        </div>
+        <div class="columns">
+            <div class="column">
                 @include('attributes::types._list')
-                </div>
             </div>
+        </div>
     </section>
 @endsection

@@ -3,7 +3,7 @@
 @section('sub_content')
     @include('_partials._breadcrumb', [
     'one_href' => route('home'), 'one' => 'Attribute',
-    'two_href' => route('home'), 'two' => 'Type',
+    'two_href' => route('type.index'), 'two' => 'Type',
     'three_href' => route('type.edit', $type->id), 'three' => 'Edit'
     ])
 

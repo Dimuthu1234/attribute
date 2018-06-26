@@ -6,16 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
+use Modules\Attributes\Entities\AttributeLabel;
 use Modules\Attributes\Entities\Type;
 use Session;
 
 class TypesController extends Controller
 {
     protected $types;
+    protected $attributeLabelList;
 
     public function __construct()
     {
         $this->types = Type::get();
+        $this->attributeLabelList = AttributeLabel::get();
     }
 
     /**
@@ -34,7 +37,8 @@ class TypesController extends Controller
      */
     public function create()
     {
-        return view('attributes::types.create');
+        return view('attributes::types.create')
+            ->withAttributeLabelList($this->attributeLabelList->pluck('name', 'id'));
     }
 
     /**
@@ -54,6 +58,8 @@ class TypesController extends Controller
             $input['image'] = $imageName;
         }
         $type = Type::create($input);
+        $type->attributeLabels()->sync((array) $request->input('attribute_label_list'));
+
 
         Session::flash('success','Type has been added !');
         return redirect()->route('type.index');
@@ -76,7 +82,8 @@ class TypesController extends Controller
     public function edit(Type $type)
     {
         return view('attributes::types.edit')
-            ->withType($type);
+            ->withType($type)
+            ->withAttributeLabelList($this->attributeLabelList->pluck('name', 'id'));
     }
 
     /**
@@ -96,6 +103,7 @@ class TypesController extends Controller
             $input['image'] = $imageName;
         }
         $type->update($input);
+        $type->attributeLabels()->sync((array) $request->input('attribute_label_list'));
         Session::flash('success','Type has been Updated !');
         return redirect()->route('type.index');
     }
@@ -107,6 +115,7 @@ class TypesController extends Controller
     public function destroy(Type $type)
     {
         $type->delete();
+        Session::flash('success','Type has been Deleted !');
         return redirect()->route('type.index');
     }
 }
