@@ -5,7 +5,7 @@
         </p>
         <ul class="menu-list">
             <li><a class="is-active" href="{{ route('home') }}">Dashboard</a></li>
-            <li><a>Products</a></li>
+            <li><a href="{{ route('product.index') }}">Products</a></li>
         </ul>
         <p class="menu-label">
             Attribute Master Cruds

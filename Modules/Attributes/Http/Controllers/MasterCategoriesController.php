@@ -18,8 +18,8 @@ class MasterCategoriesController extends Controller
 
     public function __construct()
     {
-        $this->masterCategories = MasterCategory::get();
-        $this->attributeLabelList = AttributeLabel::get();
+        $this->masterCategories = MasterCategory::where('status', 0)->get();
+        $this->attributeLabelList = AttributeLabel::where('status', 0)->get();
     }
     /**
      * Display a listing of the resource.
@@ -49,20 +49,35 @@ class MasterCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        if ($request->hasFile('image')){
-            $name = $input['name'];
-            $formtedName = str_replace([' ','%'], '-', $name);
-
-            $imageName = $formtedName . '-' . (string) rand(00000, 99999)  . '.' . $request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path().'/images/masterCategory', $imageName);
-            $input['image'] = $imageName;
+        $list = $request->attribute_label_list;
+        $strings_array = [];
+        $id_array = [];
+        for ($x = 0; $x < sizeof($list); $x++) {
+            if(is_numeric($list[$x])){
+                $id_array[] = $list[$x];
+            }
+            else{
+                $strings_array[] = $list[$x];
+            }
         }
-        $masterCategory = MasterCategory::create($input);
-        $masterCategory->attributeLabels()->sync((array) $request->input('attribute_label_list'));
 
-        Session::flash('success','Master Category has been added !');
-        return redirect()->route('master_category.index');
+        return[$strings_array];
+
+
+//        $input = $request->all();
+//        if ($request->hasFile('image')){
+//            $name = $input['name'];
+//            $formtedName = str_replace([' ','%'], '-', $name);
+//
+//            $imageName = $formtedName . '-' . (string) rand(00000, 99999)  . '.' . $request->file('image')->getClientOriginalExtension();
+//            $request->file('image')->move(public_path().'/images/masterCategory', $imageName);
+//            $input['image'] = $imageName;
+//        }
+//        $masterCategory = MasterCategory::create($input);
+//        $masterCategory->attributeLabels()->sync((array) $request->input('attribute_label_list'));
+//
+//        Session::flash('success','Master Category has been added !');
+//        return redirect()->route('master_category.index');
     }
 
     /**
@@ -115,7 +130,8 @@ class MasterCategoriesController extends Controller
      */
     public function destroy(MasterCategory $masterCategory)
     {
-        $masterCategory->delete();
+//        $masterCategory->delete();
+        $masterCategory->update(['status' => 1]);
         Session::flash('success','Master Category has been Deleted !');
         return redirect()->route('master_category.index');
     }

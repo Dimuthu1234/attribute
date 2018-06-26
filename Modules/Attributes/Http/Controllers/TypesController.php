@@ -17,8 +17,8 @@ class TypesController extends Controller
 
     public function __construct()
     {
-        $this->types = Type::get();
-        $this->attributeLabelList = AttributeLabel::get();
+        $this->types = Type::where('status', 0)->get();
+        $this->attributeLabelList = AttributeLabel::where('status', 0)->get();
     }
 
     /**
@@ -114,7 +114,8 @@ class TypesController extends Controller
      */
     public function destroy(Type $type)
     {
-        $type->delete();
+//        $type->delete();
+        $type->update(['status' => 1]);
         Session::flash('success','Type has been Deleted !');
         return redirect()->route('type.index');
     }

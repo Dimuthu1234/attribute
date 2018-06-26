@@ -19,7 +19,7 @@ class AttributeLabelsController extends Controller
 
     public function __construct()
     {
-        $this->attributeLabels = AttributeLabel::get();
+        $this->attributeLabels = AttributeLabel::where('status', 0)->get();
         $this->typeList = Type::get()->pluck('name', 'id');
         $this->masterCategoryList = MasterCategory::get()->pluck('name', 'id');
     }
@@ -100,7 +100,8 @@ class AttributeLabelsController extends Controller
      */
     public function destroy(AttributeLabel $attributeLabel)
     {
-        $attributeLabel->delete();
+//        $attributeLabel->delete();
+        $attributeLabel->update(['status' => 1]);
         Session::flash('success','Attribute Label has been Deleted !');
         return redirect()->route('attribute_label.index');
     }

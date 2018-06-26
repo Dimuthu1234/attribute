@@ -22,19 +22,19 @@
         <div class="tile is-ancestor has-text-centered">
             <div class="tile is-parent">
                 <article class="tile is-child box">
-                    <p class="title">439k</p>
+                    <p class="title">{{ Modules\Attributes\Entities\AttributeLabel::get()->count() }}</p>
                     <p class="subtitle">Attribute Labels</p>
                 </article>
             </div>
             <div class="tile is-parent">
                 <article class="tile is-child box">
-                    <p class="title">59k</p>
+                    <p class="title">{{ Modules\Attributes\Entities\MasterCategory::get()->count() }}</p>
                     <p class="subtitle">Master Categories</p>
                 </article>
             </div>
             <div class="tile is-parent">
                 <article class="tile is-child box">
-                    <p class="title">3.4k</p>
+                    <p class="title">{{ Modules\Attributes\Entities\Type::get()->count() }}</p>
                     <p class="subtitle">Types</p>
                 </article>
             </div>
