@@ -12,7 +12,10 @@
 @push('scripts')
     <script>
         $(function() {
-            $('#attribute_label_list').select2({ placeholder: 'Choose attribute labels' });
+            $('#attribute_label_list').select2({
+                tags: true,
+                placeholder: 'Choose attribute labels'
+            });
         });
     </script>
 @endpush
